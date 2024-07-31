@@ -2,15 +2,18 @@ import globals from 'globals'
 import pluginJs from '@eslint/js'
 import tseslint from 'typescript-eslint'
 import pluginVue from 'eslint-plugin-vue'
+import pluginPrettierRecommendedConfigs from 'eslint-plugin-prettier/recommended'
 
 export default [
-    { files: ['**/*.{js,mjs,cjs,ts,vue}'] },
-    { languageOptions: { globals: globals.browser } },
+    // eslint 默认推荐规则
     pluginJs.configs.recommended,
+    // ts 默认推荐规则
     ...tseslint.configs.recommended,
-    ...pluginVue.configs['flat/essential'],
-    { files: ['**/*.vue'], languageOptions: { parserOptions: { parser: tseslint.parser } } },
-    {
-        extends: ['plugin:prettier/recommended']
-    }
+    // vue3 基础推荐规则
+    ...pluginVue.configs['flat/recommended'],
+    // prettier 默认推荐规则
+    pluginPrettierRecommendedConfigs,
+    { languageOptions: { globals: globals.browser } },
+    { files: ['**/*.{js,mjs,cjs,ts,vue}'] },
+    { files: ['**/*.vue'], languageOptions: { parserOptions: { parser: tseslint.parser } } }
 ]
