@@ -23,6 +23,10 @@ const input = ref(0)
 onMounted(() => {
     input.value.value = '1'
 })
+
+defineExpose({
+    addCount
+})
 </script>
 
 <template>
